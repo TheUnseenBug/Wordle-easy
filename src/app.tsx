@@ -1,9 +1,18 @@
+import { useState, useEffect } from "preact/hooks";
 import "./app.css";
 import Keyboard from "./components/Keyboard";
 import Rows from "./components/Rows";
+import { fetchWords, Word } from "./hooks/fetchWords";
 
 export function App() {
 const wordCount = 5;
+const [words, setWords] = useState<Word[] | undefined>(undefined);
+
+  useEffect(() => {
+    fetchWords().then(setWords);
+  }, []);
+
+  console.log(words);
 
   return (
     <>
